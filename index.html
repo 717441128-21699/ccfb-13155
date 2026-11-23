@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAR 海冰影像分析与航路规划</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <aside id="panel">
+    <h1>SAR 海冰分析</h1>
+
+    <section>
+      <h2>① 影像导入</h2>
+      <label>冰情场景
+        <select id="scenario">
+          <option value="pack">密集冰区(冰缝+冰脊)</option>
+          <option value="miz">边缘冰区(开阔水+浮冰)</option>
+          <option value="newice">新冰区(尼罗冰)</option>
+        </select>
+      </label>
+      <label>风速 m/s <input id="wind" type="number" value="10" min="0" max="20" step="1" /></label>
+      <label>雷达视数 L <input id="looks" type="number" value="4" min="1" max="16" step="1" /></label>
+      <label>影像尺寸
+        <select id="size">
+          <option value="1024">1024 × 1024</option>
+          <option value="2048" selected>2048 × 2048</option>
+          <option value="4096">4096 × 4096</option>
+          <option value="8192">8192 × 8192</option>
+          <option value="10000">10000 × 10000</option>
+        </select>
+      </label>
+      <button id="btnGen">生成样例雷达图</button>
+      <div class="or">或导入单通道影像(PNG/JPEG,按 dB 灰度解释)</div>
+      <input id="fileInput" type="file" accept="image/*" />
+      <div id="genStatus" class="status"></div>
+    </section>
+
+    <section>
+      <h2>② 去斑</h2>
+      <button id="btnDespeckle" disabled>运行保边去斑</button>
+      <div class="hint">框选均匀区测 ENL:按住 <b>Shift</b> 拖拽<br/>点选冰缝边缘测锐度:按住 <b>E</b> 单击</div>
+      <table class="metrics">
+        <tr><th></th><th>去斑前</th><th>去斑后</th></tr>
+        <tr><td>ENL(选区)</td><td id="enlBefore">–</td><td id="enlAfter">–</td></tr>
+        <tr><td>ENL 提升</td><td colspan="2" id="enlGain">–</td></tr>
+        <tr><td>边缘锐度(px)</td><td id="edgeBefore">–</td><td id="edgeAfter">–</td></tr>
+        <tr><td>锐度损失</td><td colspan="2" id="edgeLoss">–</td></tr>
+        <tr><td>耗时</td><td colspan="2" id="despeckleTime">–</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>③ 冰型图</h2>
+      <button id="btnClassify" disabled>运行冰型分类</button>
+      <div id="classInfo" class="status"></div>
+      <div class="legend">
+        <span><i style="background:#1b5fae"></i>开阔水</span>
+        <span><i style="background:#a8d8e6"></i>新冰</span>
+        <span><i style="background:#e8e6df"></i>一年冰</span>
+        <span><i style="background:#c44e52"></i>多年冰</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>④ 航路</h2>
+      <div class="hint">按住 <b>S</b> 单击设船位,按住 <b>T</b> 单击设目标点</div>
+      <button id="btnRoute" disabled>规划航路</button>
+      <div id="routeInfo" class="status"></div>
+    </section>
+  </aside>
+
+  <main>
+    <div id="toolbar">
+      <span>图层:</span>
+      <label><input type="radio" name="layer" value="hh" checked /> HH</label>
+      <label><input type="radio" name="layer" value="hv" /> HV</label>
+      <label><input type="radio" name="layer" value="filt" /> 去斑 HH</label>
+      <label><input type="radio" name="layer" value="class" /> 冰型图</label>
+      <span id="cursorInfo"></span>
+    </div>
+    <canvas id="view"></canvas>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

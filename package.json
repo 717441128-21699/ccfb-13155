@@ -1,0 +1,22 @@
+{
+  "name": "sar-ice-nav",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "极地科考船 SAR 海冰影像分析:去斑、冰型分类、航路规划 (WebGL2 + TypeScript)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "tsx --test test/*.test.ts",
+    "test:e2e": "node test/e2e.mjs 2048",
+    "test:e2e:full": "node test/e2e.mjs 10000"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "playwright": "^1.65.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}

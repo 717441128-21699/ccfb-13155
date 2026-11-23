@@ -1,0 +1,45 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; font: 14px/1.5 "Segoe UI", "Microsoft YaHei", sans-serif; }
+body { display: flex; background: #0f1418; color: #dde3e8; }
+
+#panel {
+  width: 300px; flex: none; overflow-y: auto;
+  background: #171e24; border-right: 1px solid #2a343d;
+  padding: 12px 14px;
+}
+#panel h1 { font-size: 17px; margin: 4px 0 10px; color: #7fd0ff; }
+#panel section { border-top: 1px solid #2a343d; padding: 10px 0 14px; }
+#panel h2 { font-size: 14px; margin: 0 0 8px; color: #9fb6c6; }
+#panel label { display: block; margin: 6px 0; color: #b8c4cc; }
+#panel input[type=number], #panel select {
+  width: 110px; background: #0f1418; color: #dde3e8;
+  border: 1px solid #3a4650; border-radius: 4px; padding: 3px 6px;
+}
+#panel select { width: 100%; }
+button {
+  width: 100%; margin: 8px 0 4px; padding: 7px 0;
+  background: #1f6fb4; color: #fff; border: 0; border-radius: 5px;
+  font-size: 14px; cursor: pointer;
+}
+button:disabled { background: #3a4650; color: #8a959d; cursor: default; }
+button:not(:disabled):hover { background: #2a83cc; }
+.or { color: #6b7882; font-size: 12px; margin: 6px 0 2px; }
+.hint { color: #7c8a94; font-size: 12px; margin: 6px 0; }
+.status { color: #8fd0a0; font-size: 12px; min-height: 18px; white-space: pre-line; }
+
+table.metrics { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 6px; }
+table.metrics th, table.metrics td { border: 1px solid #2a343d; padding: 3px 6px; text-align: center; }
+table.metrics th { background: #1c252d; color: #9fb6c6; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; font-size: 12px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 4px; vertical-align: -2px; }
+
+main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+#toolbar {
+  flex: none; display: flex; gap: 14px; align-items: center;
+  padding: 6px 12px; background: #171e24; border-bottom: 1px solid #2a343d;
+  font-size: 13px;
+}
+#toolbar label { color: #b8c4cc; cursor: pointer; }
+#cursorInfo { margin-left: auto; color: #7c8a94; font-size: 12px; }
+#view { flex: 1; width: 100%; min-height: 0; cursor: crosshair; }
